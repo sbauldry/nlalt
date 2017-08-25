@@ -1,4 +1,4 @@
-TITLE: (M2) Latent Basis (modified);
+TITLE: (M4) Linear ALT;
 DATA: FILE = "nlalt-mplus-data.txt";
 VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
     sbp17 dbp17;
@@ -6,14 +6,15 @@ VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15
   MISSING = ALL(-9);
 MODEL:
 
-!Growth
+!Linear Growth
 WtIn BY w1-w12@1;
-WtLn BY w1@0 w2-w11 w12@1;
+WtLn BY w1@.17 w2@.33 w3@.5 w4@.67 w5@.83 w6@1 w7@1.17 w8@1.33 
+  w9@1.5 w10@1.67 w11@1.83 w12@2;
 
 !Autoregressive
-w1 on bw2@0; w2 ON w1@0; w3 ON w2@0; w4 ON w3@0; w5 ON w4@0; 
-w6 ON w5@0; w7 ON w6@0; w8 ON w7@0; w9 ON w8@0; w10 ON w9@0; 
-w11 ON w10@0; w12 ON w11@0;
+w1 on bw2 (1); w2 ON w1 (1); w3 ON w2 (1); w4 ON w3 (1); w5 ON w4 (1); 
+w6 ON w5 (1); w7 ON w6 (1); w8 ON w7 (1); w9 ON w8 (1); w10 ON w9 (1); 
+w11 ON w10 (1); w12 ON w11 (1);
 
 !Effects of deviation from age at given wave
 w1 on d1; w2 ON d2; w3 ON d3; w4 ON d4; w5 ON d5; w6 ON d6; 

@@ -1,9 +1,11 @@
-TITLE: (M2) Latent Basis (modified);
+TITLE: (M6) Latent basis ALT;
 DATA: FILE = "nlalt-mplus-data.txt";
 VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
     sbp17 dbp17;
   USEVARIABLES = bw2 w1-w12 d1-d12;
   MISSING = ALL(-9);
+  AUXILIARY = uncchdid;
+ANALYSIS: ESTIMATOR = MLR;
 MODEL:
 
 !Growth
@@ -11,9 +13,9 @@ WtIn BY w1-w12@1;
 WtLn BY w1@0 w2-w11 w12@1;
 
 !Autoregressive
-w1 on bw2@0; w2 ON w1@0; w3 ON w2@0; w4 ON w3@0; w5 ON w4@0; 
-w6 ON w5@0; w7 ON w6@0; w8 ON w7@0; w9 ON w8@0; w10 ON w9@0; 
-w11 ON w10@0; w12 ON w11@0;
+w1 on bw2 (1); w2 ON w1 (1); w3 ON w2 (1); w4 ON w3 (1); w5 ON w4 (1); 
+w6 ON w5 (1); w7 ON w6 (1); w8 ON w7 (1); w9 ON w8 (1); w10 ON w9 (1); 
+w11 ON w10 (1); w12 ON w11 (1);
 
 !Effects of deviation from age at given wave
 w1 on d1; w2 ON d2; w3 ON d3; w4 ON d4; w5 ON d5; w6 ON d6; 
@@ -26,5 +28,6 @@ w7 ON d7; w8 ON d8; w9 ON d9; w10 ON d10; w11 ON d11; w12 ON d12;
 bw2 d1-d12;
 
 OUTPUT: STDYX;
-
+SAVEDATA: FILE = nlalt-6-lbalt-diag.txt;
+  SAVE = MAHALANOBIS COOKS INFLUENCE;
 

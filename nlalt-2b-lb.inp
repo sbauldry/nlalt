@@ -22,6 +22,10 @@ w7 ON d7; w8 ON d8; w9 ON d9; w10 ON d10; w11 ON d11; w12 ON d12;
 !Fix indicator intercepts and free latent means
 [w1-w12@0]; [WtIn*]; [WtLn*];
 
+!Fix variance of linear component to 0 (negative variance estimate when free)
+WtLn@0;
+WtLn WITH WtIn@0 bw2@0 d1@0 d2@0 d3@0 d4@0 d5@0 d6@0 d7@0 d8@0 d9@0 d10@0 d11@0 d12@0;
+
 !Address missing data in exogenous covariates
 bw2 d1-d12;
 

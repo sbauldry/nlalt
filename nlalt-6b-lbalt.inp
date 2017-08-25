@@ -1,0 +1,35 @@
+TITLE: (M6) Latent basis ALT;
+DATA: FILE = "nlalt-mplus-data.txt";
+VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
+    sbp17 dbp17;
+  USEVARIABLES = bw2 w1-w12 d1-d12;
+  MISSING = ALL(-9);
+MODEL:
+
+!Growth
+WtIn BY w1-w12@1;
+WtLn BY w1@0 w2*-0.55 w3*-1.55 w4*-2 w5*-2 w6*-2 w7*-1.5 w8*-1 w9*-0.6 w10*-0.2 
+        w11*0.4 w12@1;
+
+!Autoregressive
+w1 on bw2*0.75 (1); w2 ON w1 (1); w3 ON w2 (1); w4 ON w3 (1); w5 ON w4 (1); 
+w6 ON w5 (1); w7 ON w6 (1); w8 ON w7 (1); w9 ON w8 (1); w10 ON w9 (1); 
+w11 ON w10 (1); w12 ON w11 (1);
+
+!Effects of deviation from age at given wave
+w1 on d1*0.5; w2 ON d2*0.3; w3 ON d3*0.3; w4 ON d4*0.2; w5 ON d5*0.1; w6 ON d6*0.3; 
+w7 ON d7*0.1; w8 ON d8*0.3; w9 ON d9*0.2; w10 ON d10*0.3; w11 ON d11*0.2; w12 ON d12*0.2; 
+
+!Fix indicator intercepts and free latent means
+[w1-w12@0]; [WtIn*2.5]; [WtLn*0.2];
+
+!Fix variance of linear component to 0 (negative variance estimate when free)
+WtLn@0;
+WtLn WITH WtIn@0 bw2@0 d1@0 d2@0 d3@0 d4@0 d5@0 d6@0 d7@0 d8@0 d9@0 d10@0 d11@0 d12@0;
+
+!Address missing data in exogenous covariates
+bw2 d1-d12;
+
+OUTPUT: STDYX;
+
+

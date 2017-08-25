@@ -1,33 +1,33 @@
-TITLE: (M4) Quadratic ALT;
+TITLE: (M5) Quadratic ALT;
 DATA: FILE = "nlalt-mplus-data.txt";
 VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
     sbp17 dbp17;
-  USEVARIABLES = bw2 w1-w15 d1-d15;
+  USEVARIABLES = bw2 w1-w12 d1-d12;
   MISSING = ALL(-9);
 MODEL:
 
 !Growth
-WtIn BY w1-w15@1;
+WtIn BY w1-w12@1;
 WtLn BY w1@.17 w2@.33 w3@.5 w4@.67 w5@.83 w6@1 w7@1.17 w8@1.33 
-  w9@1.5 w10@1.67 w11@1.83 w12@2 w13@8 w14@11 w15@15;
+  w9@1.5 w10@1.67 w11@1.83 w12@2;
 WtQd BY w1@.03 w2@.11 w3@.25 w4@.44 w5@.69 w6@1 w7@1.36 w8@1.78 
-  w9@2.25 w10@2.78 w11@3.36 w12@4 w13@64 w14@121 w15@225;
+  w9@2.25 w10@2.78 w11@3.36 w12@4;
 
 !Autoregressive
 w1 on bw2 (1); w2 ON w1 (1); w3 ON w2 (1); w4 ON w3 (1); w5 ON w4 (1); 
 w6 ON w5 (1); w7 ON w6 (1); w8 ON w7 (1); w9 ON w8 (1); w10 ON w9 (1); 
-w11 ON w10 (1); w12 ON w11 (1); w13 ON w12; w14 ON w13; w15 ON w14;
+w11 ON w10 (1); w12 ON w11 (1);
 
 !Effects of deviation from age at given wave
 w1 on d1; w2 ON d2; w3 ON d3; w4 ON d4; w5 ON d5; w6 ON d6; 
 w7 ON d7; w8 ON d8; w9 ON d9; w10 ON d10; w11 ON d11; w12 ON d12; 
-w13 ON d13; w14 ON d14; w15 ON d15;
+
 
 !Fix indicator intercepts and free latent means
-[w1-w15@0]; [WtIn*]; [WtLn*]; [WtQd*];
+[w1-w12@0]; [WtIn*]; [WtLn*]; [WtQd*];
 
 !Address missing data in exogenous covariates
-bw2 d1-d15;
+bw2 d1-d12;
 
 OUTPUT: STDYX;
 
