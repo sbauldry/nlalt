@@ -1,7 +1,6 @@
 TITLE: (M5) Quadratic ALT;
 DATA: FILE = "nlalt-mplus-data.txt";
-VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
-    sbp17 dbp17;
+VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w12 d1-d12;
   USEVARIABLES = bw2 w1-w12 d1-d12;
   MISSING = ALL(-9);
   AUXILIARY = uncchdid;

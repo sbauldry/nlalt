@@ -1,7 +1,6 @@
 TITLE: (M7) Quadratic NLALT with covariates;
 DATA: FILE = "nlalt-mplus-data.txt";
-VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w15 d1-d15 
-    sbp17 dbp17;
+VARIABLE: NAMES = uncchdid smoke age1 age2 age3 bw2 w1-w12 d1-d12;
   USEVARIABLES = bw2 w1-w12 d1-d12 age1 age3 smoke;
   MISSING = ALL(-9);
 MODEL:
