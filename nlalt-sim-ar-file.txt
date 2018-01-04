@@ -1,0 +1,14 @@
+#!/bin/sh
+
+for i in `seq 1 500`
+do
+  {
+  echo "DATA: FILE = d$i.txt;"
+  echo "VARIABLE: NAMES = y1 y2 y3 y4 y5;"
+  echo "MODEL:"
+  echo "y2 ON y1 (a); y3 ON y2 (a);"
+  echo "y4 ON y3 (a); y5 ON y4 (a);"
+  echo "y1;"
+  echo "OUTPUT: STDYX;"
+  } > nlalt-sim-ar-$i.inp
+done

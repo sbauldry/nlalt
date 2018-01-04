@@ -30,3 +30,4 @@ save nlalt-data, replace
 recode _all (. = -9)
 desc
 outsheet using nlalt-mplus-data.txt, replace comma nolabel noname
+

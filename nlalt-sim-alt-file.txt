@@ -1,0 +1,19 @@
+#!/bin/sh
+
+for i in `seq 1 500`
+do
+  {
+  echo "DATA: FILE = d$i.txt;"
+  echo "VARIABLE: NAMES = y1 y2 y3 y4 y5;"
+  echo "MODEL:"
+  echo "i BY y2@1 y3@1 y4@1 y5@1;"
+  echo "s BY y2@1 y3@2 y4@3 y5@4;"
+  echo "y2 ON y1 (a); y3 ON y2 (a);"
+  echo "y4 ON y3 (a); y5 ON y4 (a);"
+  echo "[y2-y5@0]; [i]; [s];"
+  echo "y1;"
+  echo "y1 WITH i@0 s@0;"
+  echo "i WITH s@0;"
+  echo "OUTPUT: STDYX;"
+  } > nlalt-sim-alt-$i.inp
+done
