@@ -229,7 +229,7 @@ graph twoway (rspike ub_rho lb_rho mdl1, lc(black) )                    ///
   scheme(s1mono) ylab(0 0.2 0.5 1 1.5 , angle(h) grid gstyle(dot))      ///
   ytit("estimate") xlab(1 " " 1.5 "QALT" 2 "ALT" 2.5 "AR" 3 " ",        ///
     grid gstyle(dot)) xtit("{bf:Model}") yline(0.2, lc(black) lp(dash)) ///
-  tit("Autoregressive Parameter") legend(off) saving(`g1') 
+  tit("(A) Autoregressive Parameter") legend(off) saving(`g1') 
   
  
 tempfile g2 g3
@@ -242,14 +242,14 @@ graph twoway (rspike ub_e1 lb_e1 mdl2, lc(black) )                    ///
   scheme(s1mono) ylab(, angle(h) grid gstyle(dot))                    ///
   ytit("estimate") xlab(1 " " 1.5 "QALT" 2 "ALT" 2.5 "QLC" 3 " ",     ///
     grid gstyle(dot)) xtit("{bf:Model}") yline(0, lc(black) lp(dash)) ///
-  tit("Mean of Latent Intercept") legend(off) saving(`g2') 
+  tit("(B) Mean of Latent Intercept") legend(off) saving(`g2') 
   
 graph twoway (rspike ub_e2 lb_e2 mdl2, lc(black) )                    ///
   (scatter e2 mdl2, mc(black) msize(small) m(O)),                     ///
   scheme(s1mono) ylab(, angle(h) grid gstyle(dot))                    ///
   ytit("estimate") xlab(1 " " 1.5 "QALT" 2 "ALT" 2.5 "QLC" 3 " ",     ///
     grid gstyle(dot)) xtit("{bf:Model}") yline(1, lc(black) lp(dash)) ///
-  tit("Mean of Latent Linear Term") legend(off) saving(`g3') 
+  tit("(C) Mean of Latent Linear Term") legend(off) saving(`g3') 
 
 tempfile g4
 keep if model == "qalt" | model == "qgc"
@@ -261,10 +261,11 @@ graph twoway (rspike ub_e3 lb_e3 mdl3, lc(black) )                    ///
   scheme(s1mono) ylab(1.5(0.5)3, angle(h) grid gstyle(dot))           ///
   ytit("estimate") xlab(1 " " 1.5 "QALT" 2 "QLC" 2.5 " ",             ///
     grid gstyle(dot)) xtit("{bf:Model}") yline(2, lc(black) lp(dash)) ///
-  tit("Mean of Latent Quadratic Term") legend(off) saving(`g4') 
+  tit("(D) Mean of Latent Quadratic Term") legend(off) saving(`g4') 
   
 graph combine "`g1'" "`g2'" "`g3'" "`g4'", scheme(s1mono)
 graph export ~/desktop/nlalt-fig2.pdf, replace
+graph export ~/desktop/nlalt-fig2.tif, replace
 restore
 
 

@@ -36,6 +36,7 @@ xtline w, t(age) i(id) overlay legend(off) scheme(s1mono) `plotline' ///
   plot51( lp(solid) lc(black) lw(thick) ) ytit("weight (kg)")        ///
   ylab(0(3)15, angle(h) grid gstyle(dot)) xlab(0(.4)2, grid gstyle(dot))
 graph export ~/desktop/nlalt-fig3.pdf, replace
+graph export ~/desktop/nlalt-fig3.tif, replace
 restore
 
 
@@ -84,4 +85,5 @@ xtline w, t(age) i(id) overlay legend(off) scheme(s1mono) `plotline' ///
   plot51( lp(dash) lc(black) lw(thick) ) ytit("weight (kg)")        ///
   ylab(0(3)15, angle(h) grid gstyle(dot)) xlab(0(.4)2, grid gstyle(dot))
 graph export ~/desktop/nlalt-fig4.pdf, replace
+graph export ~/desktop/nlalt-fig4.tif, replace
 restore
